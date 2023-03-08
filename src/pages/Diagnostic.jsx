@@ -22,19 +22,24 @@ const Diagnostic = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col">
-              <h1 className="fs-1">Bienvenido al diagnóstico de Referencia</h1>
-              <h2 className="fs-3">Información del paciente</h2>
+              <h1 className="fs-2 mb-4">Diagnóstico de Referencia</h1>
+              <h2 className="fs-4">Información del paciente</h2>
               <form action="">
-                <label htmlFor="" className="form-label">
-                  Nombre
-                </label>
-                <input className="form-control" type="text" name="" id="" />
-                <label htmlFor="" className="form-label">
-                  Edad
-                </label>
+                <div className="input-group my-4">
+                  <label htmlFor="" className="form-label">
+                    Nombre
+                  </label>
+                  <input className="form-control" type="text" name="" id="" />
+                  <label htmlFor="" className="form-label">
+                    Edad
+                  </label>
+                  <input className="form-control" type="number" name="" id="" />
+                </div>
                 <h3 className="fs-3">Síntomas</h3>
-                <p>Buscar un síntoma</p>
-                <input type="search" name="" id="" className="form-control" />
+                <label htmlFor=""></label>
+                <i className="bi bi-search"></i>
+                <input type="search" placeholder="Ingresa el nombre del síntoma..." name="" id="" className="form-control mb-4" 
+                />
               </form>
               <Button variant="primary" onClick={() => setModalShow(true)}>
                 Ayuda
@@ -47,7 +52,6 @@ const Diagnostic = () => {
             <div className="col">
               <h3>Tabla de síntomas de tu búsqueda</h3>
               
-
               <table className="table table-striped table-info">
                 <thead>
                   <tr>
@@ -73,7 +77,6 @@ const Diagnostic = () => {
                   <tr>
                     <th scope="row">3</th>
                     <td>
-                      
                     </td>
                     <td></td>
                     <td></td>
@@ -89,12 +92,6 @@ const Diagnostic = () => {
 
       </div>{/* 
       <button onClick={() => setModalShow(true)}>Test</button> */}
-      
-
-      
-      
-      
-
     </>
   )
 }

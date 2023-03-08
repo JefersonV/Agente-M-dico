@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
 import Diagnostic from './pages/Diagnostic';
 import Home from './pages/Home';
 
@@ -16,15 +16,13 @@ function App() {
       <Router>
         <Switch>
           <Route
-            exact path="/"
-          >
-            <Home />
-          </Route>
+            exact path="/" component={Home}
+          />
           <Route
-           exact path="/diagnostic"
-          >
-            <Diagnostic />
-          </Route>
+           path="/diagnostic"
+           component={Diagnostic}
+          />
+           
         </Switch>
         <Route>
 

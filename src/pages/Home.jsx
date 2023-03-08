@@ -17,8 +17,7 @@ const Home = () => {
 							<button className="btn btn-light">Iniciar herramientass</button>
 					</div>
 					<div className="col">
-						<img src="" alt="Imagen" />
-						<p>asdfa</p>
+						<img src="https://img.freepik.com/vector-gratis/icono-isometrico-aplicacion-chatbot-telefono-inteligente-personaje-gafas-realidad-virtual_1284-63051.jpg?w=740&t=st=1678285475~exp=1678286075~hmac=be20d4ddfdbcbe8de836c1b10efa45f77a345d1262a4c453b102302104266db9" width="450px" alt="Imagen" />
 					</div>
 				</div>
 			</div>

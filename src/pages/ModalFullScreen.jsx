@@ -15,7 +15,7 @@ function ModalFullScreen() {
   return (
     <>
       {values.map((v, idx) => (
-        <Button key={idx} className="me-2 mb-2" onClick={() => handleShow(v)}>
+        <Button key={idx} className="me-2 mb-2 disabled" onClick={() => handleShow(v)}>
           Finalizar consulta
           {typeof v === 'string' && `below ${v.split('-')[0]}`}
         </Button>
