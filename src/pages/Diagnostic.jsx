@@ -3,18 +3,13 @@ import Header from '../components/Header'
 import ModalVertically from './ModalVertically';
 import ModalFullScreen from './ModalFullScreen';
 import Button from 'react-bootstrap/Button';
+import { sintomasEnfermedadesComunes, sintomas, sintomasUnicos } from '../Base'
 
 const Diagnostic = () => {
   const [modalShow, setModalShow] = React.useState(false);
-  const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
-  const [fullscreen, setFullscreen] = useState(true);
-  const [show, setShow] = useState(false);
-  /* const myModal = document.getElementById('myModal')
-  const myInput = document.getElementById('myInput')
 
-  myModal.addEventLisstener('shown.bs.modal', () => {
-    myInput.focus()
-  }) */
+  console.log(sintomas)
+  
   return (
     <>
       <Header />
@@ -41,10 +36,11 @@ const Diagnostic = () => {
                 <input type="search" placeholder="Ingresa el nombre del síntoma..." name="" id="" className="form-control mb-4" 
                 />
               </form>
-              <Button variant="primary" onClick={() => setModalShow(true)}>
+              {/* <Button variant="primary" onClick={() => setModalShow(true)}>
                 Ayuda
-              </Button>
+              </Button> */}
               <ModalVertically
+                /* PROPS  */
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
@@ -84,13 +80,15 @@ const Diagnostic = () => {
                 </tbody>
               </table>
               <ModalFullScreen 
-        
+                /* PROPS */
+                clase={"me-2 mb-2 disabled"}
               />
             </div>
           </div>
         </div>
 
       </div>{/* 
+      
       <button onClick={() => setModalShow(true)}>Test</button> */}
     </>
   )
