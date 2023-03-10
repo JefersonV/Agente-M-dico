@@ -9,7 +9,8 @@ import Switch from '../components/Switch';
 
 const Diagnostic = () => {
   const [modalShow, setModalShow] = useState(false);
-  /* // const [enfermedadEncontrada, setEnfermedadEncontrada] = useState('') 
+  const [diseaseFound, setDiseaseFound] = useState('Esperando..') 
+  /* 
   console.warn('Sintomas comunes')
   // Primera palabra del síntoma
   console.log(sintomasComunes)
@@ -57,18 +58,22 @@ const Diagnostic = () => {
   /* Determinar que tipo de enfermeda tiene el paciente */
   /* arrayIdsComunes -> todos los ids de las enfermedades
      arrayCriteriosEnfermedad -> ids de criterios de enfermedad [1-n .... normalmente 7 items]*/
-  const sintomasDelPaciente = (arrayIdsComunes,arrayCriteriosEnfermedad, noCriterioEnfermedad) => { 
+  const sintomasDelPaciente = (arrayIdsComunes,arrayCriteriosEnfermedad) => { 
     // Compara el total de ids de sintomas con los criterios de una enfermedad
     // Si se cumple la condición de arrayCriteriosEnfermedad[] -> true
+
     const contieneCriteriosDeSintomas = arrayCriteriosEnfermedad.every((idSintoma) => {
       return arrayIdsComunes.includes(idSintoma)
     })
     
-    contieneCriteriosDeSintomas ? 
-      enfermedadEncontrada = criteriosEnfermedades[noCriterioEnfermedad].nombre
-    : null
-    console.log(contieneCriteriosDeSintomas)
-    console.log('La enfermedad encontrada', enfermedadEncontrada)
+    if(contieneCriteriosDeSintomas && arrayCriteriosEnfermedad.includes(criteriosEnfermedades[0].sintomas)) {
+      enfermedadEncontrada = criteriosEnfermedades[0].nombre
+      console.log(enfermedadEncontrada)
+      // setDiseaseFound(enfermedadEncontrada)
+
+    } else {
+      console.warn('No cumple')
+    }
   }
 
   /*Buscador  */
@@ -78,11 +83,9 @@ const Diagnostic = () => {
     console.log(e.target.value)
     setSearch(e.target.value)
   }
-  useEffect(()=> {
+  /* useEffect(()=> {
     searcher
-  }, [])
-
-  const textoSearch = 'Ingresa tu búsqueda ... '
+  }, []) */
 
   const resultsSearch = !search ? sintomasEnfermedadesComunesState
     : sintomasEnfermedadesComunesState.filter((dato) => 
@@ -91,14 +94,52 @@ const Diagnostic = () => {
       // resto de campos
     )
 
-    console.warn('State')
-    console.log(sintomasEnfermedadesComunesState)
- /*  
-  console.log(sintomasEnfermedadesComunesState[0].nombre)
-  // Enfermedad 1
-  sintomasDelPaciente(idsComunes, criteriosEnfermedades[0].sintomas, 0)
-  sintomasDelPaciente(idsComunes, criteriosEnfermedades[1].sintomas,1) */
 
+    const [sintomasSeleccionados, setSintomasSeleccionados] = useState([])
+
+  // console.log(sintomasSeleccionados)
+  // sintomasDelPaciente(idsComunes, sintomasSeleccionados)
+
+    /* PRUEBAS */
+    console.warn('Selected')
+    console.log(sintomasSeleccionados)
+    // console.warn('Todos')
+    // console.log(idsComunes) 
+    const contieneCriterios2 = sintomasSeleccionados.every((idSintoma) => {
+      return idsComunes.includes(idSintoma)
+    })
+  
+  /*   contieneCriterios2 ?
+      console.log('Listo')
+      : 
+      console.log('Aún no')
+   */
+
+  const array_equal = (arraySintomas, arrayCriterios) => {
+    if ((Array.isArray(arraySintomas) && Array.isArray(arrayCriterios)) === false) return false;
+      return JSON.stringify([...new Set(arraySintomas.flat().sort())]) === JSON.stringify([...new Set(arrayCriterios.flat().sort())]);
+  }
+
+  
+  console.warn('CRITERIOS')
+  console.log(criteriosEnfermedades[0].sintomas)
+  console.warn('iguales en contenido')
+  console.log(array_equal(sintomasSeleccionados,criteriosEnfermedades[0].sintomas))
+  
+  const queEnfermedad = (arraySintomas) => {
+      let titulo = ''
+      // let ejemplo = [1,2,3,4,5,6,7]
+      if(array_equal(sintomasSeleccionados,criteriosEnfermedades[0].sintomas)) {
+        setDiseaseFound(titulo)
+        titulo = criteriosEnfermedades[0].nombre
+        console.log(titulo)
+        // setEnfermedadEncontradaState(titulo)
+      } else {
+        console.log('falta')
+      }
+    }
+
+    queEnfermedad(sintomasSeleccionados)
   return (
     <>
       <Header />
@@ -131,9 +172,7 @@ const Diagnostic = () => {
                   className="form-control mb-4" 
                 />
               </form>
-{/*               <Switch >
-
-              </Switch> */}
+              <p>{diseaseFound}</p>
               <Button variant="primary" onClick={() => setModalShow(true)}>
                 Ayuda
               </Button>
@@ -158,7 +197,7 @@ const Diagnostic = () => {
                   
                   { search === ''  ? (
                     <tr>
-                      <td>Debes ingresar palabras clave para encontrar tu síntoma</td>
+                      <td colSpan="3">Debes ingresar palabras clave para encontrar tu síntoma</td>
                     </tr>
                   )   
                   :
@@ -166,23 +205,30 @@ const Diagnostic = () => {
                     <tr key={index}>
                       <th>{index+1}</th>
                       <td>{item.nombre}</td>
-
+                      <td>
+                        {/* <Switch ></Switch> */}
+                        <input
+                          type="checkbox"
+                          checked={sintomasSeleccionados.includes(item.id)}
+                          onChange={(e) => {
+                            queEnfermedad(sintomasSeleccionados)
+                            
+                          if (e.target.checked) {
+                            setSintomasSeleccionados([
+                              /* Construcción del array  */
+                              ...sintomasSeleccionados,
+                              item.id,
+                            ]);
+                          } else {
+                            setSintomasSeleccionados(
+                              sintomasSeleccionados.filter((id) => id !== item.id)
+                            );
+                          }
+                        }}
+                        />
+                      </td>
                     </tr>
                   )}
-                  
-                  {/* <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><input type="checkbox" name="" className="form" id="" /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td><input type="checkbox" name="" className="form" id="" /></td>
-                  </tr> */}
-                  
                 </tbody>
               </table>
               <ModalFullScreen 
