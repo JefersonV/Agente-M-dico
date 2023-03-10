@@ -1,4 +1,5 @@
 const sintomasEnfermedadesComunes = [
+    /* Resfriado común */
     { id: 1, nombre: 'Congestión nasal y secreción nasal' },
     { id: 2, nombre: 'Dolor de garganta' },
     { id: 3, nombre: 'Tos' },
@@ -6,67 +7,85 @@ const sintomasEnfermedadesComunes = [
     { id: 5, nombre: 'Fiebre baja' },
     { id: 6, nombre: 'Fatiga y debilidad' },
     { id: 7, nombre: 'Dolores musculares' },
+    /* Gripe */
     { id: 8, nombre: 'Fiebre alta (generalmente superior a 38°C)' },
     { id: 9, nombre: 'Escalofríos y sudores' },
     { id: 10, nombre: 'Dolor de cabeza' },
     { id: 11, nombre: 'Dolor muscular y de cuerpo' },
     { id: 12, nombre: 'Congestión nasal' },
-    { id: 13, nombre: 'Tos seca y persistente' },
-    { id: 14, nombre: 'Falta de aire o sibilancias en casos de alergias respiratorias graves' },
-    { id: 15, nombre: 'Sibilancias (ruido agudo al respirar)' },
-    { id: 16, nombre: 'Opresión en el pecho' },
-    { id: 17, nombre: 'Dificultad para respirar o respiración rápida y superficial' },
-    { id: 18, nombre: 'Dificultad para hablar debido a la falta de aire' },
-    { id: 19, nombre: 'Mareo y aturdimiento' },
-    { id: 20, nombre: 'Visión borrosa o doble' },
-    { id: 21, nombre: 'Zumbido en los oídos' },
-    { id: 22, nombre: 'Palpitaciones cardíacas' },
-    { id: 23, nombre: 'Sed frecuente y aumento de la micción' },
-    { id: 24, nombre: 'Visión borrosa' },
-    { id: 25, nombre: 'Entumecimiento u hormigueo en manos y pies' },
-    { id: 26, nombre: 'Heridas que tardan en cicatrizar' },
-    { id: 27, nombre: 'Infecciones frecuentes, especialmente de la piel y las encías' },
-    { id: 28, nombre: 'Aumento de peso, especialmente en la zona abdominal' },
-    { id: 29, nombre: 'Dificultad para respirar o respiración superficial' },
-    { id: 30, nombre: 'Sudoración excesiva' },
-    { id: 31, nombre: 'Dolor en las articulaciones, especialmente en las rodillas y la espalda' },
-    { id: 32, nombre: 'Problemas de sueño, como apnea del sueño' },
-    { id: 33, nombre: 'Problemas de salud relacionados con la obesidad, como diabetes, hipertensión arterial y enfermedad cardíaca' },
-    { id: 34, nombre: 'Tristeza persistente o vacío emocional' },
-    { id: 35, nombre: 'Pérdida de interés o placer en actividades que antes eran agradables' },
-    { id: 36, nombre: 'Cambios en el apetito, como aumento o disminución del apetito' },
-    { id: 37, nombre: 'Insomnio o somnolencia excesiva' },
-    { id: 38, nombre: 'Fatiga y debilidad' },
-    { id: 39, nombre: 'Sentimientos de inutilidad o culpa excesiva' },
-    { id: 40, nombre: 'Dificultad para concentrarse o tomar decisiones' },
-    { id: 41, nombre: 'Pensamientos de muerte o suicidio' },
-    { id: 42, nombre: 'Preocupación excesiva o constante sobre eventos futuros' },
-    { id: 43, nombre: 'Sensación de tensión o nerviosismo' },
-    { id: 44, nombre: 'Agitación o inquietud' },
-    { id: 45, nombre: 'Fatiga y debilidad' },
-    { id: 46, nombre: 'Dificultad para concentrarse o tomar decisiones' },
-    { id: 47, nombre: 'Problemas de sueño, como insomnio o sueño interrumpido' },
-    { id: 48, nombre: 'Síntomas físicos, como sudoración, temblores, dolores de cabeza y molestias gastrointestinales' },
-    { id: 49, nombre: 'Dolor o sensación de ardor en el pecho y/o la garganta' },
-    { id: 50, nombre: 'Regurgitación de alimentos o líquidos ácidos en la boca' },
-    { id: 51, nombre: 'Dificultad para tragar' },
-    { id: 52, nombre: 'Náuseas y vómitos' },
-    { id: 53, nombre: 'Sensación de plenitud o hinchazón abdominal después de comer' },
-    { id: 54, nombre: 'Tos seca o ronquera, especialmente por la noche' },
-    { id: 55, nombre: 'Dolor de garganta o sensación de tener un bulto en la garganta' },
-    { id: 56, nombre: 'Enrojecimiento del ojo' },
-    { id: 57, nombre: 'Picazón, ardor o sensación de quemazón en el ojo afectado' },
-    { id: 58, nombre: 'Lagrimeo excesivo' },
-    { id: 59, nombre: 'Secreción oculares que pueden ser claras, amarillas o verdes' },
-    { id: 60, nombre: 'Sensibilidad a la luz' },
-    { id: 61, nombre: 'Visión borrosa' },
-    { id: 62, nombre: 'Náuseas y vómitos' },
-    { id: 63, nombre: 'Diarrea acuosa' },
-    { id: 64, nombre: 'Dolor abdominal y calambres' },
-    { id: 65, nombre: 'Fiebre ' },
-    { id: 66, nombre: 'Pérdida de apetito' },
-    { id: 67, nombre: 'Fatiga y debilidad' },
-    { id: 68, nombre: 'Dolor de cabeza y muscular' },
+    { id: 13, nombre: 'Dolor de garganta'},
+    { id: 14, nombre: 'Tos seca y persistente' },
+    { id: 15, nombre: 'Fatiga y debilidad' },
+    /* Alergias */
+    { id: 16, nombre: 'Tos seca y persistente' },
+    { id: 17, nombre: 'Sibilancias (ruido agudo al respirar)' },
+    { id: 18, nombre: 'Opresión en el pecho' },
+    { id: 19, nombre: 'Dificultad para respirar o respiración rápida y superifical' },
+    { id: 20, nombre: 'Fatiga y debilidad' },
+    { id: 21, nombre: 'Dificultad para hablar debido a la falta de aire' },
+    /* Hipertensión arterial */
+    { id: 22, nombre: 'Dolor de cabeza, especialmente en la parte posterior de la cabeza' },
+    { id: 23, nombre: 'Mareo y aturdimiento' },
+    { id: 24, nombre: 'Visión borrosa o doble' },
+    { id: 25, nombre: 'Zumbido en los oídos' },
+    { id: 26, nombre: 'Dificultad para respirar' },
+    { id: 27, nombre: 'Palpitaciones cardíacas' },
+    { id: 28, nombre: 'Fatiga y debilidad' },
+    /* Diabetes tipo 2 */
+    { id: 29, nombre: 'Sed frecuente y aumento de la micción' },
+    { id: 30, nombre: 'Fatiga y debilidad' },
+    { id: 31, nombre: 'Visión borrosa' },
+    { id: 32, nombre: 'Entumecimiento u hormigueo en manos y pies' },
+    { id: 33, nombre: 'Heridas que tardan en cicatrizar' },
+    { id: 34, nombre: 'Infecciones frecuentes, especialmente de la piel y las encías' },
+    { id: 35, nombre: 'Aumento de peso, especialmente en la zona abdominal' },
+    /*Obesidad  */
+    { id: 36, nombre: 'Aumento de peso, especialmente en la zona abdominal' },
+    { id: 37, nombre: 'Dificultad para respirar o respiración superficial' },
+    { id: 38, nombre: 'Sudoración excesiva' },
+    { id: 39, nombre: 'Dolor en las articulaciones, especialmente en las rodillas y la espalda' },
+    { id: 40, nombre: 'Problemas de sueño, como apnea del sueño' },
+    { id: 41, nombre: 'Problemas de salud relacionados con la obesidad, como diabetes, hipertensión arterial y enfermedad cardíaca' },
+    /* Depresión */
+    { id: 42, nombre: 'Tristeza persistente o vacío emocional' },
+    { id: 43, nombre: 'Pérdida de interés o placer en actividades que antes eran agradables' },
+    { id: 44, nombre: 'Cambios en el apetito, como aumento o disminución del apetito' },
+    { id: 45, nombre: 'Insomnio o somnolencia excesiva' },
+    { id: 46, nombre: 'Fatiga y debilidad' },
+    { id: 47, nombre: 'Sentimientos de inutilidad o culpa excesiva' },
+    { id: 48, nombre: 'Dificultad para concentrarse o tomar decisiones' },
+    { id: 49, nombre: 'Pensamientos de muerte o suicidio' },
+    /* Ansiedad */
+    { id: 50, nombre: 'Preocupación excesiva o constante sobre eventos futuros' },
+    { id: 51, nombre: 'Sensación de tensión o nerviosismo' },
+    { id: 52, nombre: 'Agitación o inquietud' },
+    { id: 53, nombre: 'Fatiga y debilidad' },
+    { id: 54, nombre: 'Dificultad para concentrarse o tomar decisiones' },
+    { id: 55, nombre: 'Problemas de sueño, como insomnio o sueño interrumpido' },
+    { id: 56, nombre: 'Síntomas físicos, como sudoración, temblores, dolores de cabeza y molestias gastrointestinales' },
+    /* Acidez estomacal */
+    { id: 57, nombre: 'Dolor o sensación de ardor en el pecho y/o la garganta' },
+    { id: 58, nombre: 'Regurgitación de alimentos o líquidos ácidos en la boca' },
+    { id: 59, nombre: 'Dificultad para tragar' },
+    { id: 60, nombre: 'Náuseas y vómitos' },
+    { id: 61, nombre: 'Sensación de plenitud o hinchazón abdominal después de comer' },
+    { id: 62, nombre: 'Tos seca o ronquera, especialmente por la noche' },
+    { id: 63, nombre: 'Dolor de garganta o sensación de tener un bulto en la garganta' },
+    /* Conjuntivitis */
+    { id: 64, nombre: 'Enrojecimiento del ojo' },
+    { id: 65, nombre: 'Picazón, ardor o sensación de quemazón en el ojo afectado' },
+    { id: 66, nombre: 'Lagrimeo excesivo' },
+    { id: 67, nombre: 'Secreción oculares que pueden ser claras, amarillas o verdes' },
+    { id: 68, nombre: 'Sensibilidad a la luz' },
+    { id: 69, nombre: 'Visión borrosa' },
+    /* Gastroenteritis */
+    { id: 70, nombre: 'Náuseas y vómitos' },
+    { id: 71, nombre: 'Diarrea acuosa' },
+    { id: 72, nombre: 'Dolor abdominal y calambres' },
+    { id: 73, nombre: 'Fiebre ' },
+    { id: 74, nombre: 'Pérdida de apetito' },
+    { id: 75, nombre: 'Fatiga y debilidad' },
+    { id: 76, nombre: 'Dolor de cabeza y muscular' }
   ]
 
   sintomasEnfermedadesComunes.forEach(sintoma => {
@@ -74,17 +93,21 @@ const sintomasEnfermedadesComunes = [
     console.log(`La primera palabra del síntoma ${sintoma.id} es "${primeraPalabra}"`);
   });
 
-  const sintomas = sintomasEnfermedadesComunes.map(enfermedad => enfermedad.nombre.split(' ')[0]);
+  const sintomaCompleto = sintomasEnfermedadesComunes.map(enfermedad =>
+    console.log(enfermedad.nombre)
+  )
+
+  const sintomasComunes = sintomasEnfermedadesComunes.map(enfermedad => enfermedad.nombre.split(' ')[0]);
 
   //Filtra no repetidos
-  const repetidos = sintomas.filter(word => word != word)
+  const repetidos = sintomasComunes.filter(word => word != word)
 
   console.log('repeat',repetidos)
 
-  console.log('Array primera palabra', sintomas);
-  const sintomasUnicos = [...new Set(sintomas)];
+  console.log('Array primera palabra', sintomasComunes);
+  const sintomasUnicos = [...new Set(sintomasComunes)];
   console.log('Repeat',sintomasUnicos);
   
   // console.log(sintomasEnfermedadesComunes)
 
-export { sintomasEnfermedadesComunes, sintomas, sintomasUnicos }
+export { sintomasEnfermedadesComunes, sintomasComunes, sintomasUnicos, sintomaCompleto }
