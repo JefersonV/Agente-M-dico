@@ -10,6 +10,16 @@ import Switch from '../components/Switch';
 const Diagnostic = () => {
   const [modalShow, setModalShow] = useState(false);
   const [diseaseFound, setDiseaseFound] = useState('Esperando..') 
+  const [sintomasSeleccionados, setSintomasSeleccionados] = useState([])
+
+  const [datosUsuario, setDatosUsuario] = useState([])
+
+  const handleOnChange = e => {
+    setDatosUsuario(e.target.value)
+    console.log(datosUsuario)
+  }
+  /* Indicador */
+  const [sintomaCompleto, setSintomaCompleto] = useState([])
   /* 
   console.warn('Sintomas comunes')
   // Primera palabra del síntoma
@@ -42,40 +52,61 @@ const Diagnostic = () => {
     { nombre: "Conjuntivitis", sintomas: [64, 65, 66, 67, 68, 69]},
     {nombre: "Náuseas y vómitos", sintomas: [70, 71, 72, 73, 74, 75, 76]}
   ];
-  /* Utilidad */
-  const busquedaVacia = [
-    { nombre: "Ingresa tu búsqueda"}
-  ]
-  // console.warn('titulos')
-  // console.log(criteriosEnfermedades[0].nombre)
+
+  const array_equal = (arraySintomas, arrayCriterios) => {
+    if ((Array.isArray(arraySintomas) && Array.isArray(arrayCriterios)) === false) return false;
+    return JSON.stringify([...new Set(arraySintomas.flat().sort())]) === JSON.stringify([...new Set(arrayCriterios.flat().sort())]);
+  }
+
+  console.warn('CRITERIOS')
+  console.log(criteriosEnfermedades[0].sintomas)
+  console.warn('iguales en contenido')
+  console.log(array_equal(sintomasSeleccionados,criteriosEnfermedades[0].sintomas))
   
-  // Ids de todos los síntomas
-  let idsComunes = sintomasEnfermedadesComunes.map(item => item.id)
-  // console.log(idsComunes)
-
-  let enfermedadEncontrada = ''
-
-  /* Determinar que tipo de enfermeda tiene el paciente */
-  /* arrayIdsComunes -> todos los ids de las enfermedades
-     arrayCriteriosEnfermedad -> ids de criterios de enfermedad [1-n .... normalmente 7 items]*/
-  const sintomasDelPaciente = (arrayIdsComunes,arrayCriteriosEnfermedad) => { 
-    // Compara el total de ids de sintomas con los criterios de una enfermedad
-    // Si se cumple la condición de arrayCriteriosEnfermedad[] -> true
-
-    const contieneCriteriosDeSintomas = arrayCriteriosEnfermedad.every((idSintoma) => {
-      return arrayIdsComunes.includes(idSintoma)
-    })
-    
-    if(contieneCriteriosDeSintomas && arrayCriteriosEnfermedad.includes(criteriosEnfermedades[0].sintomas)) {
-      enfermedadEncontrada = criteriosEnfermedades[0].nombre
-      console.log(enfermedadEncontrada)
-      // setDiseaseFound(enfermedadEncontrada)
-
-    } else {
-      console.warn('No cumple')
+  let titulo = ''
+  /* Identificar la enfermedad según los sintomas */
+  const queEnfermedad = (arraySintomas) => {
+    /*  */
+    if(array_equal(arraySintomas,criteriosEnfermedades[0].sintomas)) {
+      // setDiseaseFound('asdf')
+      titulo = criteriosEnfermedades[0].nombre
+      // console.log(titulo)
+      // console.log(typeof(titulo))
+    } 
+    if(array_equal(arraySintomas,criteriosEnfermedades[1].sintomas)) {
+      titulo = criteriosEnfermedades[1].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[2].sintomas)) {
+      titulo = criteriosEnfermedades[2].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[3].sintomas)) {
+      titulo = criteriosEnfermedades[3].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[4].sintomas)) {
+      titulo = criteriosEnfermedades[4].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[5].sintomas)) {
+      titulo = criteriosEnfermedades[5].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[6].sintomas)) {
+      titulo = criteriosEnfermedades[6].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[7].sintomas)) {
+      titulo = criteriosEnfermedades[7].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[8].sintomas)) {
+      titulo = criteriosEnfermedades[8].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[9].sintomas)) {
+      titulo = criteriosEnfermedades[9].nombre
+    }
+    if(array_equal(arraySintomas,criteriosEnfermedades[10].sintomas)) {
+      titulo = criteriosEnfermedades[10].nombre
     }
   }
 
+  // setDiseaseFound(titulo)
+  queEnfermedad(sintomasSeleccionados)
   /*Buscador  */
   // state para buscador
   const [search, setSearch] = useState("")
@@ -83,9 +114,12 @@ const Diagnostic = () => {
     console.log(e.target.value)
     setSearch(e.target.value)
   }
-  /* useEffect(()=> {
-    searcher
-  }, []) */
+  useEffect(()=> {
+    /* Enfermedad detectada */
+    setDiseaseFound(titulo)
+    console.warn('Disease')
+    console.log(diseaseFound)
+  })
 
   const resultsSearch = !search ? sintomasEnfermedadesComunesState
     : sintomasEnfermedadesComunesState.filter((dato) => 
@@ -93,53 +127,9 @@ const Diagnostic = () => {
       // && dato.nombre.length === search.length
       // resto de campos
     )
-
-
-    const [sintomasSeleccionados, setSintomasSeleccionados] = useState([])
-
   // console.log(sintomasSeleccionados)
   // sintomasDelPaciente(idsComunes, sintomasSeleccionados)
-
-    /* PRUEBAS */
-    console.warn('Selected')
-    console.log(sintomasSeleccionados)
-    // console.warn('Todos')
-    // console.log(idsComunes) 
-    const contieneCriterios2 = sintomasSeleccionados.every((idSintoma) => {
-      return idsComunes.includes(idSintoma)
-    })
   
-  /*   contieneCriterios2 ?
-      console.log('Listo')
-      : 
-      console.log('Aún no')
-   */
-
-  const array_equal = (arraySintomas, arrayCriterios) => {
-    if ((Array.isArray(arraySintomas) && Array.isArray(arrayCriterios)) === false) return false;
-      return JSON.stringify([...new Set(arraySintomas.flat().sort())]) === JSON.stringify([...new Set(arrayCriterios.flat().sort())]);
-  }
-
-  
-  console.warn('CRITERIOS')
-  console.log(criteriosEnfermedades[0].sintomas)
-  console.warn('iguales en contenido')
-  console.log(array_equal(sintomasSeleccionados,criteriosEnfermedades[0].sintomas))
-  
-  const queEnfermedad = (arraySintomas) => {
-      let titulo = ''
-      // let ejemplo = [1,2,3,4,5,6,7]
-      if(array_equal(sintomasSeleccionados,criteriosEnfermedades[0].sintomas)) {
-        setDiseaseFound(titulo)
-        titulo = criteriosEnfermedades[0].nombre
-        console.log(titulo)
-        // setEnfermedadEncontradaState(titulo)
-      } else {
-        console.log('falta')
-      }
-    }
-
-    queEnfermedad(sintomasSeleccionados)
   return (
     <>
       <Header />
@@ -147,20 +137,25 @@ const Diagnostic = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col">
-              <h1 className="fs-2 mb-4">Diagnóstico de Referencia</h1>
-              <h2 className="fs-4">Información del paciente</h2>
+              {/* <h1 className="fs-2 mb-4">Diagnóstico de Referencia</h1> */}
+              <h2 className="fs-3">Información del paciente</h2>
               <form action="">
                 <div className="input-group my-4">
                   <label htmlFor="" className="form-label">
                     Nombre
                   </label>
-                  <input className="form-control" type="text" name="" id="" />
+                  <input 
+                    className="form-control" 
+                    type="text" 
+                    name="" 
+                    id="" 
+                    onChange={handleOnChange} />
                   <label htmlFor="" className="form-label">
                     Edad
                   </label>
                   <input className="form-control" type="number" name="" id="" />
                 </div>
-                <h3 className="fs-3">Síntomas</h3>
+                <h3 className="fs-3">Búsqueda de síntomas</h3>
                 <label htmlFor=""></label>
                 <i className="bi bi-search"></i>
                 <input 
@@ -172,20 +167,8 @@ const Diagnostic = () => {
                   className="form-control mb-4" 
                 />
               </form>
-              <p>{diseaseFound}</p>
-              <Button variant="primary" onClick={() => setModalShow(true)}>
-                Ayuda
-              </Button>
-              <ModalVertically
-                /* PROPS  */
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
-            </div>
-            <div className="col">
-              <h3>Tabla de síntomas de tu búsqueda</h3>
-              
-              <table className="table table-striped table-info">
+              <h3 className="fs-4">Tabla de síntomas</h3>
+              <table className="table table-striped table-bordered my-4">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -211,7 +194,7 @@ const Diagnostic = () => {
                           type="checkbox"
                           checked={sintomasSeleccionados.includes(item.id)}
                           onChange={(e) => {
-                            queEnfermedad(sintomasSeleccionados)
+                            // queEnfermedad(sintomasSeleccionados)
                             
                           if (e.target.checked) {
                             setSintomasSeleccionados([
@@ -219,10 +202,17 @@ const Diagnostic = () => {
                               ...sintomasSeleccionados,
                               item.id,
                             ]);
+                            setSintomaCompleto([
+                              ...sintomaCompleto,
+                              item.nombre
+                            ])
                           } else {
                             setSintomasSeleccionados(
                               sintomasSeleccionados.filter((id) => id !== item.id)
                             );
+                            setSintomaCompleto(
+                              sintomaCompleto.filter((nombre) => nombre !== item.nombre)
+                            )
                           }
                         }}
                         />
@@ -231,14 +221,46 @@ const Diagnostic = () => {
                   )}
                 </tbody>
               </table>
-              <ModalFullScreen 
-                /* PROPS */
-                clase={"me-2 mb-2 bg-light disabled"}
+              <p>{diseaseFound}</p>
+              <Button variant="primary" onClick={() => setModalShow(true)}>
+                Ayuda
+              </Button>
+              <ModalVertically
+                /* PROPS  */
+                show={modalShow}
+                onHide={() => setModalShow(false)}
               />
+            </div>
+            <div className="col">
+              <h3>Síntomas seleccionados</h3>
+              <ol class="list-group list-group-numbered my-4">
+                {sintomaCompleto.map((item) => 
+                  <li class="list-group-item">{item}</li>
+                )
+                }
+              </ol>
+            <div className="card">
+              <h5 className="card-header">Enfermedad detectada</h5>
+              <div className="card-body">
+                <h5 className="card-title">{datosUsuario}</h5>
+                <p className="card-text">La enfermedad detectada en base a los síntomas es:
+                </p>
+                <p className="text-decoration-underline text-success">
+                  {diseaseFound}
+                </p>
+                {/* <ModalFullScreen 
+                  // PROPS 
+                  clase={"me-2 mb-2 bg-light disabled"}
+                /> */}
+                <p className="fst-italic fw-lighter">
+                  No olvides que esto no es un diagnóstico oficial. En caso de tener dudas siempre es mejor realizar una consulta médica
+                </p>
+              </div>
+            </div>
+              
             </div>
           </div>
         </div>
-
       </div>{/* 
       
       <button onClick={() => setModalShow(true)}>Test</button> */}
